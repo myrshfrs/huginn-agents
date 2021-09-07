@@ -1,0 +1,46 @@
+# WebsiteAgent
+
+{
+  "expected_update_period_in_days": "24",
+  "url": "https://www.zhibowu.com/",
+  "type": "html",
+  "mode": "on_change",
+  "extract": {
+    "url": {
+      "xpath": "//ul[@class=\"live-previews\"]/li[@class=\"recommend live\"]/div[@class=\"preview\"]/a[@class=\"title\"]",
+      "value": "@href"
+    },
+    "time": {
+      "xpath": "//ul[@class=\"live-previews\"]/li[@class=\"recommend live\"]/div[@class=\"preview\"]/time",
+      "value": "@title"
+    },
+    "title": {
+      "xpath": "//ul[@class=\"live-previews\"]/li[@class=\"recommend live\"]/div[@class=\"preview\"]/a[@class=\"title\"]",
+      "value": "string(.)"
+    },
+    "catalog": {
+      "xpath": "//ul[@class=\"live-previews\"]/li[@class=\"recommend live\"]/div[@class=\"preview\"]/a[@class=\"catalog\"]",
+      "value": "string(.)"
+    }
+  }
+}
+
+
+# DataOutputAgent
+
+{
+  "secrets": [
+    "zhibowu"
+  ],
+  "expected_receive_period_in_days": 2,
+  "template": {
+    "title": "推荐赛事",
+    "description": "直播屋推荐赛事",
+    "item": {
+      "title": "{{time}}--{{catalog}}--{{title}}",
+      "description": "直播地址：https://www.zhibowu.com{{url}}",
+      "link": "https://www.zhibowu.com{{url}}"
+    }
+  },
+  "ns_media": "false"
+}
