@@ -1,0 +1,41 @@
+# WebsiteAgent 
+
+{
+  "expected_update_period_in_days": "24",
+  "url": "https://www.cnbeta.com",
+  "type": "html",
+  "mode": "on_change",
+  "extract": {
+    "url": {
+      "xpath": "//div[@class=\"items-area\"]/div/dl/dt/a",
+      "value": "@href"
+    },
+    "title": {
+      "xpath": "//div[@class=\"items-area\"]/div/dl/dt/a",
+      "value": "string(.)"
+    },
+    "content": {
+      "xpath": "//div[@class=\"items-area\"]/div/dl/dd",
+      "value": "string(.)"
+    }
+  }
+}
+
+# DataOutputAgent 
+
+{
+  "secrets": [
+    "a-secret-key"
+  ],
+  "expected_receive_period_in_days": 2,
+  "template": {
+    "title": "cnbeta",
+    "description": "cnbeta",
+    "item": {
+      "title": "{{title}}",
+      "description": "{{content}}",
+      "link": "{{url}}"
+    }
+  },
+  "ns_media": "false"
+}
